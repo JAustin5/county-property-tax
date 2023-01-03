@@ -1,0 +1,81 @@
+<script>
+
+var homeValue, county, taxRate, finalPrice, taxRateLow, taxRateMed, taxRateHigh;
+
+//Constant:
+var	charlestonLow = 1.5;
+var	charlestonMed = 1.75;
+var	charlestonHigh = 2;
+	
+var dorchesterLow = 1.25;
+var	dorchesterMed = 1.50;
+var	dorchesterHigh = 1.75;
+	
+var	berkeleyLow = 2;
+var	berkeleyMed = 2.25;
+var	berkeleyHigh = 2.75;
+	
+var	lowCutoff = 50000;
+var	highCutoff = 150000;
+var percent = 0.01
+var errorFlag = 0;	
+	
+//Input:
+county = prompt("What county? charleston, dorchester, or berkeley" , "");
+
+//Calculations/logic:
+switch(county)
+{//start switch
+ 		case "charleston":
+	taxRateLow = charlestonLow;
+	taxRateMed = charlestonMed;
+	taxRateHigh = charlestonHigh;
+	break;
+    case "dorchester":
+	taxRateLow = dorchesterLow;
+	taxRateMed = dorchesterMed;
+	taxRateHigh = dorchesterHigh;
+	break;
+    case "berkeley":
+	taxRateLow = berkeleyLow;
+	taxRateMed = berkeleyMed;
+	taxRateHigh = berkeleyHigh;
+	break;
+	default:
+					alert("You typed " + county + " you should have typed: charleston, dorchester, or berkeley");
+					errorFlag = 1;
+	break;
+}//end switch
+
+if (errorFlag == 0)
+{//start no errors
+homeValue = prompt("What is the home value?" , "");
+		//conversion
+		homeValue = parseInt(homeValue);
+if (homeValue > highCutoff)
+{//start low cost
+	taxRate = taxRateHigh;
+}//end low cost
+else if (homeValue < lowCutoff)
+{//start high cost
+	taxRate = taxRateLow;
+}//end high cost
+else
+{//start med cost
+	taxRate = taxRateMed;
+}//end med cost
+
+rate = taxRate * percent;
+finalPrice = homeValue * rate;
+
+//Output:
+document.write("The home value: $" + homeValue.toFixed(2));
+document.write("<br>The county: " + county);
+document.write("<br>The tax rate: " + taxRate.toFixed(2));
+document.write("<br>The final price: $" + finalPrice.toFixed(2));
+}//stop no errors
+else
+{//start has errors
+document.write("You typed " + county + " you should have typed: charleston, dorchester, or berkeley");
+}//stop has errors
+</script>
